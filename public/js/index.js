@@ -87,9 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 let btnBadge = document.getElementById('btn-badge');
 btnBadge.addEventListener('click', () => {
-    for (const recado of listaExemploRecado) {
-        recado.lido = true;
-    }
+    listaExemploRecado.forEach((recado) => {
+        if (recado.lido) {
+            recado.lido = false;
+        }
+        else {
+            recado.lido = true;
+        }
+    });
     mostrarBadge(listaExemploRecado);
 });
 function mostrarBadge(listaRecados) {
