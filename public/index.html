@@ -107,8 +107,8 @@
 
         <section class="row mt-5">
             <div class="col">
-                <button type="button" class="btn btn-primary position-relative">
-                    Recados
+                <button type="button" class="btn btn-primary position-relative" id="btn-badge">
+                    Marcar todos como lido
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                         id="mostrar-qtd-recados">
                     </span>
@@ -134,10 +134,11 @@
                             content.
                         </p>
                         <button type="button" class="btn btn-danger fs-5" data-bs-toggle="modal"
-                            data-bs-target="#meu-modal">
+                            data-bs-target="#modal-apagar">
                             <i class="bi bi-trash"></i>
                         </button>
-                        <button type="button" class="btn btn-success fs-5" data-bs-target="#meu-modal">
+                        <button type="button" class="btn btn-success fs-5" data-bs-toggle="modal"
+                            data-bs-target="#modal-editar">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                     </div>
@@ -195,13 +196,8 @@
 
         <section class="row mt-5 mb-5">
             <div class="col">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#meu-modal">
-                    Mostrar modal
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="meu-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <!-- MODAL APAGAR RECADO-->
+                <div class="modal fade" id="modal-apagar" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -220,6 +216,39 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- MODAL APAGAR RECADO-->
+                <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Atualizar Recado</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form-editar">
+                                    <div class="mb-3">
+                                        <label for="input-descricao" class="col-form-label">Descrição:</label>
+                                        <input type="text" class="form-control" id="input-descricao" value="Descrição">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input-detalhamento" class="col-form-label">Detalhamento:</label>
+                                        <textarea class="form-control"
+                                            id="input-detalhamento">Some quick example text to build on the card title and make up the bulk of the card's content.</textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    id="cancelar-editar">Cancelar</button>
+                                <button type="button" class="btn btn-success" id="botao-atualizar">Atualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>

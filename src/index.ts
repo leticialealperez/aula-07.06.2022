@@ -29,22 +29,22 @@ btnMostraAlerta.addEventListener('click', () => {
 
 
 
-// MODAL 
-let meuModal = new bootstrap.Modal('#meu-modal');
+// MODAL APAGAR 
+let modalApagar = new bootstrap.Modal('#modal-apagar');
 
-let botaoNaoConfirma = document.getElementById('botao-nao') as HTMLButtonElement;
-let botaoConfirma = document.getElementById('botao-sim') as HTMLButtonElement;
+let botaoCancelarExclusao = document.getElementById('botao-nao') as HTMLButtonElement;
+let botaoConfirmaExclusao = document.getElementById('botao-sim') as HTMLButtonElement;
 
-botaoNaoConfirma.addEventListener('click', () => {
-    meuModal.hide();
+botaoCancelarExclusao.addEventListener('click', () => {
+    modalApagar.hide();
     mostrarAlerta("Exclusão cancelada", "danger");
     setTimeout(() => {
         corpoAlerta.innerHTML = '';
     }, 3000);
 });
 
-botaoConfirma.addEventListener('click', () => {
-    meuModal.hide();
+botaoConfirmaExclusao.addEventListener('click', () => {
+    modalApagar.hide();
     mostrarAlerta("Recado excluido com sucesso!", "success");
     setTimeout(() => {
         corpoAlerta.innerHTML = '';
@@ -52,39 +52,83 @@ botaoConfirma.addEventListener('click', () => {
 });
 
 
+// MODAL EDITAR
+let modalEditar = new bootstrap.Modal('#modal-editar');
+let botaoAtualizar = document.getElementById('botao-atualizar') as HTMLButtonElement;
+let botaoCancelaEdicao = document.getElementById('cancelar-editar') as HTMLButtonElement;
+let formEditar = document.getElementById('form-editar') as HTMLFormElement;
+
+botaoAtualizar.addEventListener('click', () => {
+    let recado = {
+        descricao: (document.getElementById('input-descricao') as HTMLInputElement).value,
+        detalhamento: (document.getElementById('input-detalhamento') as HTMLInputElement).value,
+    }
+
+    console.log(recado);
+    modalEditar.hide();
+    mostrarAlerta('Recado atualizado com sucesso', 'success');
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 3000);
+});
+
+botaoCancelaEdicao.addEventListener('click', () => {
+
+    modalEditar.hide();
+    mostrarAlerta('Edição Cancelada', 'danger');
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 3000);
+})
+
 
 // BADGE
-let listaExemploRecado = [];
-
 interface Recado {
     descricao: string,
     lido: boolean
 }
 
-let recado: Recado = {
-    descricao: 'bla bla bla 1',
-    lido: true
-}
+let listaExemploRecado: Recado[] = [];
 
-let NovoRecado: Recado = {
-    descricao: 'bla bla bla 2',
-    lido: false
-}
+document.addEventListener('DOMContentLoaded', () => {
+    let recado: Recado = {
+        descricao: 'bla bla bla 1',
+        lido: false
+    }
 
-let NovoRecado2: Recado = {
-    descricao: 'bla bla bla 3',
-    lido: false
-}
+    let NovoRecado: Recado = {
+        descricao: 'bla bla bla 2',
+        lido: false
+    }
 
-listaExemploRecado.push(recado);
-listaExemploRecado.push(NovoRecado);
-listaExemploRecado.push(NovoRecado2);
+    let NovoRecado2: Recado = {
+        descricao: 'bla bla bla 3',
+        lido: false
+    }
 
+    listaExemploRecado.push(recado);
+    listaExemploRecado.push(NovoRecado);
+    listaExemploRecado.push(NovoRecado2);
 
-let recadosMostrar = listaExemploRecado.filter((recado, indice, array) => recado.lido === false);
+    mostrarBadge(listaExemploRecado);
+});
 
-let quantidadeSpan = document.getElementById('mostrar-qtd-recados') as HTMLSpanElement;
+let btnBadge = document.getElementById('btn-badge') as HTMLButtonElement;
+btnBadge.addEventListener('click', () => {
+    for (const recado of listaExemploRecado) {
+        recado.lido = true
+    }
 
-quantidadeSpan.innerHTML = `${recadosMostrar.length} 
+    mostrarBadge(listaExemploRecado);
+});
+
+function mostrarBadge(listaRecados: Recado[]) {
+    let recadosMostrar = listaRecados.filter((recado) => recado.lido === false);
+
+    let quantidadeSpan = document.getElementById('mostrar-qtd-recados') as HTMLSpanElement;
+
+    quantidadeSpan.innerHTML = `${recadosMostrar.length} 
                             <span class="visually-hidden">unread messages</span>
                             `
+}
+

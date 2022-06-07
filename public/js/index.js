@@ -24,43 +24,78 @@ btnMostraAlerta.addEventListener('click', () => {
         corpoAlerta.innerHTML = '';
     }, 3000);
 });
-// MODAL 
-let meuModal = new bootstrap.Modal('#meu-modal');
-let botaoNaoConfirma = document.getElementById('botao-nao');
-let botaoConfirma = document.getElementById('botao-sim');
-botaoNaoConfirma.addEventListener('click', () => {
-    meuModal.hide();
+// MODAL APAGAR 
+let modalApagar = new bootstrap.Modal('#modal-apagar');
+let botaoCancelarExclusao = document.getElementById('botao-nao');
+let botaoConfirmaExclusao = document.getElementById('botao-sim');
+botaoCancelarExclusao.addEventListener('click', () => {
+    modalApagar.hide();
     mostrarAlerta("Exclusão cancelada", "danger");
     setTimeout(() => {
         corpoAlerta.innerHTML = '';
     }, 3000);
 });
-botaoConfirma.addEventListener('click', () => {
-    meuModal.hide();
+botaoConfirmaExclusao.addEventListener('click', () => {
+    modalApagar.hide();
     mostrarAlerta("Recado excluido com sucesso!", "success");
     setTimeout(() => {
         corpoAlerta.innerHTML = '';
     }, 3000);
 });
-// BADGE
+// MODAL EDITAR
+let modalEditar = new bootstrap.Modal('#modal-editar');
+let botaoAtualizar = document.getElementById('botao-atualizar');
+let botaoCancelaEdicao = document.getElementById('cancelar-editar');
+let formEditar = document.getElementById('form-editar');
+botaoAtualizar.addEventListener('click', () => {
+    let recado = {
+        descricao: document.getElementById('input-descricao').value,
+        detalhamento: document.getElementById('input-detalhamento').value,
+    };
+    console.log(recado);
+    modalEditar.hide();
+    mostrarAlerta('Recado atualizado com sucesso', 'success');
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 3000);
+});
+botaoCancelaEdicao.addEventListener('click', () => {
+    modalEditar.hide();
+    mostrarAlerta('Edição Cancelada', 'danger');
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 3000);
+});
 let listaExemploRecado = [];
-let recado = {
-    descricao: 'bla bla bla 1',
-    lido: true
-};
-let NovoRecado = {
-    descricao: 'bla bla bla 2',
-    lido: false
-};
-let NovoRecado2 = {
-    descricao: 'bla bla bla 3',
-    lido: false
-};
-listaExemploRecado.push(recado);
-listaExemploRecado.push(NovoRecado);
-listaExemploRecado.push(NovoRecado2);
-let recadosMostrar = listaExemploRecado.filter((recado, indice, array) => recado.lido === false);
-let quantidadeSpan = document.getElementById('mostrar-qtd-recados');
-quantidadeSpan.innerHTML = `${recadosMostrar.length} 
+document.addEventListener('DOMContentLoaded', () => {
+    let recado = {
+        descricao: 'bla bla bla 1',
+        lido: false
+    };
+    let NovoRecado = {
+        descricao: 'bla bla bla 2',
+        lido: false
+    };
+    let NovoRecado2 = {
+        descricao: 'bla bla bla 3',
+        lido: false
+    };
+    listaExemploRecado.push(recado);
+    listaExemploRecado.push(NovoRecado);
+    listaExemploRecado.push(NovoRecado2);
+    mostrarBadge(listaExemploRecado);
+});
+let btnBadge = document.getElementById('btn-badge');
+btnBadge.addEventListener('click', () => {
+    for (const recado of listaExemploRecado) {
+        recado.lido = true;
+    }
+    mostrarBadge(listaExemploRecado);
+});
+function mostrarBadge(listaRecados) {
+    let recadosMostrar = listaRecados.filter((recado) => recado.lido === false);
+    let quantidadeSpan = document.getElementById('mostrar-qtd-recados');
+    quantidadeSpan.innerHTML = `${recadosMostrar.length} 
                             <span class="visually-hidden">unread messages</span>
                             `;
+}
