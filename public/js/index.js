@@ -22,14 +22,6 @@ let espacoCard = document.querySelector('#espaco-card');
 botaoCriar.addEventListener('click', () => {
     //captura os valores do input e cria o recado
     criarRecado();
-    //faz fechar o modal de criar recado
-    modalCriar.hide();
-    //faz mostrar o alerta
-    mostrarAlerta('Recado adicionado com sucesso', 'success');
-    //faz sumir o alerta depois de 2 segundos
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 2000);
 });
 function criarRecado() {
     let listaRecados = [];
@@ -39,15 +31,21 @@ function criarRecado() {
         detalhamento: detalhamentoRecado.value
     };
     listaRecados.push(novoRecado);
-    mostrarNoHTML(novoRecado);
+    modalCriar.hide(); //faz fechar o modal de criar recado
+    mostrarNoHTML(novoRecado); //cria o card e mostra no HTML
+    mostrarAlerta('Recado adicionado com sucesso', 'success'); //faz mostrar o alerta
+    //faz sumir o alerta depois de 2 segundos
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 2000);
 }
 function mostrarNoHTML(novoRecado) {
     let cardContainer = document.createElement('div');
-    cardContainer.setAttribute('class', 'card me-3 text-center');
+    cardContainer.setAttribute('class', 'col-3 card me-3 my-3 text-center');
     cardContainer.setAttribute('style', 'width: 18rem;');
     cardContainer.setAttribute('id', novoRecado.codigo);
     let cardBody = document.createElement('div');
-    cardBody.setAttribute('class', 'card-body d-flex flex-column');
+    cardBody.setAttribute('class', 'card-body d-flex flex-column justify-content-between');
     let codigoCard = document.createElement('h4');
     codigoCard.setAttribute('class', 'card-title');
     codigoCard.innerText = `# ${novoRecado.codigo}`;

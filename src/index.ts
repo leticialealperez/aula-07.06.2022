@@ -31,18 +31,6 @@ botaoCriar.addEventListener('click', () => {
 
     //captura os valores do input e cria o recado
     criarRecado();
-
-
-    //faz fechar o modal de criar recado
-    modalCriar.hide();
-
-    //faz mostrar o alerta
-    mostrarAlerta('Recado adicionado com sucesso', 'success');
-
-    //faz sumir o alerta depois de 2 segundos
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 2000);
 });
 
 function criarRecado() {
@@ -55,12 +43,22 @@ function criarRecado() {
     }
 
     listaRecados.push(novoRecado);
-    mostrarNoHTML(novoRecado);
+
+    modalCriar.hide(); //faz fechar o modal de criar recado
+
+    mostrarNoHTML(novoRecado); //cria o card e mostra no HTML
+
+    mostrarAlerta('Recado adicionado com sucesso', 'success'); //faz mostrar o alerta
+
+    //faz sumir o alerta depois de 2 segundos
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 2000);
 }
 
 function mostrarNoHTML(novoRecado: Recado) {
     let cardContainer: HTMLDivElement = document.createElement('div');
-    cardContainer.setAttribute('class', 'card me-3 text-center');
+    cardContainer.setAttribute('class', 'col-3 card me-3 my-3 text-center');
     cardContainer.setAttribute('style', 'width: 18rem;');
     cardContainer.setAttribute('id', novoRecado.codigo);
 
