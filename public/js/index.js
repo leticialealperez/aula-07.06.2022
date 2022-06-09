@@ -11,96 +11,82 @@ function mostrarAlerta(mensagem, tipo) {
                         `;
     espacoAlerta.appendChild(corpoAlerta);
 }
-let confirma = true;
-let btnMostraAlerta = document.getElementById('botao-alerta');
-btnMostraAlerta.addEventListener('click', () => {
-    if (confirma) {
-        mostrarAlerta('Procedimento realizado com sucesso!', 'success');
-    }
-    else {
-        mostrarAlerta('Falha na execução do procedimento', 'danger');
-    }
+// capturar os elementos para manipulação dos dados
+let modalCriar = new bootstrap.Modal('#modal-criar');
+let codigoRecado = document.querySelector('#input-criar-codigo');
+let descricaoRecado = document.querySelector('#input-criar-descricao');
+let detalhamentoRecado = document.querySelector('#input-criar-detalhamento');
+let botaoCriar = document.querySelector('#botao-criar');
+let espacoCard = document.querySelector('#espaco-card');
+// EVENTOS
+botaoCriar.addEventListener('click', () => {
+    //captura os valores do input e cria o recado
+    criarRecado();
+    //faz fechar o modal de criar recado
+    modalCriar.hide();
+    //faz mostrar o alerta
+    mostrarAlerta('Recado adicionado com sucesso', 'success');
+    //faz sumir o alerta depois de 2 segundos
     setTimeout(() => {
         corpoAlerta.innerHTML = '';
-    }, 3000);
+    }, 2000);
 });
-// MODAL APAGAR 
-let modalApagar = new bootstrap.Modal('#modal-apagar');
-let botaoCancelarExclusao = document.getElementById('botao-nao');
-let botaoConfirmaExclusao = document.getElementById('botao-sim');
-botaoCancelarExclusao.addEventListener('click', () => {
-    modalApagar.hide();
-    mostrarAlerta("Exclusão cancelada", "danger");
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 3000);
-});
-botaoConfirmaExclusao.addEventListener('click', () => {
-    modalApagar.hide();
-    mostrarAlerta("Recado excluido com sucesso!", "success");
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 3000);
-});
-// MODAL EDITAR
-let modalEditar = new bootstrap.Modal('#modal-editar');
-let botaoAtualizar = document.getElementById('botao-atualizar');
-let botaoCancelaEdicao = document.getElementById('cancelar-editar');
-let formEditar = document.getElementById('form-editar');
-botaoAtualizar.addEventListener('click', () => {
-    let recado = {
-        descricao: document.getElementById('input-descricao').value,
-        detalhamento: document.getElementById('input-detalhamento').value,
+function criarRecado() {
+    let listaRecados = [];
+    let novoRecado = {
+        codigo: codigoRecado.value,
+        descricao: descricaoRecado.value,
+        detalhamento: detalhamentoRecado.value
     };
-    console.log(recado);
-    modalEditar.hide();
-    mostrarAlerta('Recado atualizado com sucesso', 'success');
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 3000);
-});
-botaoCancelaEdicao.addEventListener('click', () => {
-    modalEditar.hide();
-    mostrarAlerta('Edição Cancelada', 'danger');
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 3000);
-});
-let listaExemploRecado = [];
-document.addEventListener('DOMContentLoaded', () => {
-    let recado = {
-        descricao: 'bla bla bla 1',
-        lido: false
-    };
-    let NovoRecado = {
-        descricao: 'bla bla bla 2',
-        lido: false
-    };
-    let NovoRecado2 = {
-        descricao: 'bla bla bla 3',
-        lido: false
-    };
-    listaExemploRecado.push(recado);
-    listaExemploRecado.push(NovoRecado);
-    listaExemploRecado.push(NovoRecado2);
-    mostrarBadge(listaExemploRecado);
-});
-let btnBadge = document.getElementById('btn-badge');
-btnBadge.addEventListener('click', () => {
-    listaExemploRecado.forEach((recado) => {
-        if (recado.lido) {
-            recado.lido = false;
-        }
-        else {
-            recado.lido = true;
-        }
+    listaRecados.push(novoRecado);
+    mostrarNoHTML(novoRecado);
+}
+function mostrarNoHTML(novoRecado) {
+    let cardContainer = document.createElement('div');
+    cardContainer.setAttribute('class', 'card me-3 text-center');
+    cardContainer.setAttribute('style', 'width: 18rem;');
+    cardContainer.setAttribute('id', novoRecado.codigo);
+    let cardBody = document.createElement('div');
+    cardBody.setAttribute('class', 'card-body d-flex flex-column');
+    let codigoCard = document.createElement('h4');
+    codigoCard.setAttribute('class', 'card-title');
+    codigoCard.innerText = `# ${novoRecado.codigo}`;
+    let descricaoCard = document.createElement('h5');
+    descricaoCard.setAttribute('class', 'card-title');
+    descricaoCard.innerHTML = novoRecado.descricao;
+    let detalhamentoCard = document.createElement('p');
+    detalhamentoCard.setAttribute('class', 'card-text');
+    detalhamentoCard.innerHTML = novoRecado.detalhamento;
+    let containerButtons = document.createElement('div');
+    containerButtons.setAttribute('class', 'container mt-5');
+    let botaoApagar = document.createElement('button');
+    botaoApagar.setAttribute('class', 'btn btn-danger fs-5 mx-2');
+    botaoApagar.setAttribute('data-bs-toggle', 'modal');
+    botaoApagar.setAttribute('data-bs-target', '#modal-apagar');
+    botaoApagar.addEventListener('click', () => {
+        apagarRecado(novoRecado.codigo);
     });
-    mostrarBadge(listaExemploRecado);
-});
-function mostrarBadge(listaRecados) {
-    let recadosMostrar = listaRecados.filter((recado) => recado.lido === false);
-    let quantidadeSpan = document.getElementById('mostrar-qtd-recados');
-    quantidadeSpan.innerHTML = `${recadosMostrar.length} 
-                            <span class="visually-hidden">unread messages</span>
-                            `;
+    botaoApagar.innerHTML = `<i class="bi bi-trash"></i>`;
+    let botaoEditar = document.createElement('button');
+    botaoEditar.setAttribute('class', 'btn btn-success fs-5');
+    botaoEditar.setAttribute('data-bs-toggle', 'modal');
+    botaoEditar.setAttribute('data-bs-target', '#modal-editar');
+    botaoEditar.addEventListener('click', () => {
+        editarRecado(novoRecado.codigo);
+    });
+    botaoEditar.innerHTML = `<i class="bi bi-pencil-square"></i>`;
+    containerButtons.appendChild(botaoApagar);
+    containerButtons.appendChild(botaoEditar);
+    cardBody.appendChild(codigoCard);
+    cardBody.appendChild(descricaoCard);
+    cardBody.appendChild(detalhamentoCard);
+    cardBody.appendChild(containerButtons);
+    cardContainer.appendChild(cardBody);
+    espacoCard.appendChild(cardContainer);
+}
+function apagarRecado(codigo) {
+    alert(codigo);
+}
+function editarRecado(codigo) {
+    alert(codigo);
 }

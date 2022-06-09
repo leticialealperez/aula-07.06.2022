@@ -9,248 +9,132 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Bootstrap - Components</title>
 </head>
 
 <body>
 
     <main class="container">
-        <section class="row  mt-5">
-            <div class="col">
-                <div class="accordion accordion-flush" id="meu-acordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                aria-controls="flush-collapseOne">
-                                Descrição Teste
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingOne" data-bs-parent="#meu-acordion">
-                            <div class="accordion-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <h4>Código 1</h4>
-                                        </div>
-                                        <div class="col-3">
-                                            <p>
-                                                Descrição Teste
-                                            </p>
-                                        </div>
-                                        <div class="col-3">
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime,
-                                                voluptatem quisquam, quis reiciendis harum ex libero itaque, officiis
-                                                architecto laudantium tempore tempora natus explicabo porro iure
-                                                obcaecati ratione dolorum cupiditate!</p>
-                                        </div>
-                                        <div class="col-3 text-center">
-                                            <button class="btn btn-danger fs-5"><i class="bi bi-trash"></i></button>
-                                            <button class="btn btn-success fs-5"><i
-                                                    class="bi bi-pencil-square"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                aria-controls="flush-collapseTwo">
-                                Descrição Teste 2
-                            </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingTwo" data-bs-parent="#meu-acordion">
-                            <div class="accordion-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <h4>Código 2</h4>
-                                        </div>
-                                        <div class="col-3">
-                                            <p>
-                                                Descrição Teste 2
-                                            </p>
-                                        </div>
-                                        <div class="col-3">
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime,
-                                                voluptatem quisquam, quis reiciendis harum ex libero itaque, officiis
-                                                architecto laudantium tempore tempora natus explicabo porro iure
-                                                obcaecati ratione dolorum cupiditate!</p>
-                                        </div>
-                                        <div class="col-3 text-center">
-                                            <button class="btn btn-danger fs-5"><i class="bi bi-trash"></i></button>
-                                            <button class="btn btn-success fs-5"><i
-                                                    class="bi bi-pencil-square"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
+        <!-- Alerta -->
         <section class="row mt-5">
-            <div class="col">
+            <div class="col-4 offset-4">
                 <div id="espaco-alerta">
-                    <!-- AQUI INSERE DINAMICAMENTE COM JS-->
+                    <!-- AQUI INSERE DINAMICAMENTE COM JS -->
                 </div>
-                <button type="button" class="btn btn-primary" id="botao-alerta">Mostrar Mensagem</button>
             </div>
         </section>
 
+        <!-- card -->
         <section class="row mt-5">
-            <div class="col">
-                <button type="button" class="btn btn-primary position-relative" id="btn-badge">
-                    Marcar todos como lido
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                        id="mostrar-qtd-recados">
-                    </span>
-                </button>
-            </div>
-        </section>
-
-        <section class="row mt-5">
-            <div class="col">
-                <a href="https://www.google.com" class="btn btn-warning" role="button" target="_blank">Clique Aqui</a>
-            </div>
-        </section>
-
-        <section class="row mt-5">
-            <div class="col d-flex justify-content-around">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Codigo 1</h5>
+            <div class="col d-flex " id="espaco-card">
+                <div class="card me-3 text-center" style="width: 18rem;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h4 class="card-title">Codigo 1</h4>
                         <h5 class="card-title">Descricao</h5>
                         <p class="card-text">
                             Some quick example text to build on the card title and make up the bulk of
                             the card's
                             content.
                         </p>
-                        <button type="button" class="btn btn-danger fs-5" data-bs-toggle="modal"
-                            data-bs-target="#modal-apagar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                        <button type="button" class="btn btn-success fs-5" data-bs-toggle="modal"
-                            data-bs-target="#modal-editar">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
+                        <div class="container mt-5">
+                            <button type="button" class="btn btn-danger fs-5 mx-2" data-bs-toggle="modal"
+                                data-bs-target="#modal-apagar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button type="button" class="btn btn-success fs-5" data-bs-toggle="modal"
+                                data-bs-target="#modal-editar">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <button type="button" class="btn btn-primary btn-lg botao-flutuante" data-bs-toggle="modal"
+            data-bs-target="#modal-criar"><i class="bi bi-plus-lg"></i></button>
 
-        <section class="row mt-5 mb-5">
-            <div class="col">
-                <div id="meu-carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#meu-carousel" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#meu-carousel" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#meu-carousel" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
+        <!-- MODAL APAGAR RECADO-->
+        <div class="modal fade" id="modal-apagar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deseja excluir o recado 3</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="1000">
-                            <img src="https://picsum.photos/200" class="d-block h-50 w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img src="https://picsum.photos/200" class="d-block h-50 w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://picsum.photos/200" class="d-block h-50 w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                        </div>
+                    <div class="modal-body">
+                        Ao excluir esse recado ele será perdido definitivamente
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#meu-carousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#meu-carousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="botao-nao">Não</button>
+                        <button type="button" class="btn btn-success" id="botao-sim">Sim</button>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="row mt-5 mb-5">
-            <div class="col">
-                <!-- MODAL APAGAR RECADO-->
-                <div class="modal fade" id="modal-apagar" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Deseja excluir o recado 3</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+        <!-- MODAL EDITAR RECADO-->
+        <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Atualizar Recado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-editar">
+                            <div class="mb-3">
+                                <label for="input-descricao" class="col-form-label">Descrição:</label>
+                                <input type="text" class="form-control" id="input-descricao" value="Descrição">
                             </div>
-                            <div class="modal-body">
-                                Ao excluir esse recado ele será perdido definitivamente
+                            <div class="mb-3">
+                                <label for="input-detalhamento" class="col-form-label">Detalhamento:</label>
+                                <textarea class="form-control"
+                                    id="input-detalhamento">Some quick example text to build on the card title and make up the bulk of the card's content.</textarea>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="botao-nao">Não</button>
-                                <button type="button" class="btn btn-success" id="botao-sim">Sim</button>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                            id="cancelar-editar">Cancelar</button>
+                        <button type="button" class="btn btn-success" id="botao-atualizar">Atualizar</button>
                     </div>
                 </div>
-
-                <!-- MODAL APAGAR RECADO-->
-                <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Atualizar Recado</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="form-editar">
-                                    <div class="mb-3">
-                                        <label for="input-descricao" class="col-form-label">Descrição:</label>
-                                        <input type="text" class="form-control" id="input-descricao" value="Descrição">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="input-detalhamento" class="col-form-label">Detalhamento:</label>
-                                        <textarea class="form-control"
-                                            id="input-detalhamento">Some quick example text to build on the card title and make up the bulk of the card's content.</textarea>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                    id="cancelar-editar">Cancelar</button>
-                                <button type="button" class="btn btn-success" id="botao-atualizar">Atualizar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </section>
+        </div>
+
+        <!-- MODAL CRIAR RECADO-->
+        <div class="modal fade" id="modal-criar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Criar Recado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-criar">
+                            <div class="mb-3">
+                                <label for="input-criar-codigo" class="col-form-label">Código:</label>
+                                <input type="number" class="form-control" id="input-criar-codigo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="input-criar-descricao" class="col-form-label">Descrição:</label>
+                                <input type="text" class="form-control" id="input-criar-descricao">
+                            </div>
+                            <div class="mb-3">
+                                <label for="input-criar-detalhamento" class="col-form-label">Detalhamento:</label>
+                                <textarea class="form-control" id="input-criar-detalhamento"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" id="botao-criar">Criar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- JavaScript Bundle with Popper -->
