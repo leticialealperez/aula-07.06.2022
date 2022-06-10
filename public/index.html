@@ -28,27 +28,7 @@
 
         <!-- card -->
         <section class="row ms-2 me-2 mt-5 text-center" id="espaco-card">
-            <div class="col-3 card me-3 my- 3 text-center" style="width: 18rem;">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h4 class="card-title">Codigo 1</h4>
-                    <h5 class="card-title">Descricao</h5>
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's
-                        content.
-                    </p>
-                    <div class="container mt-3">
-                        <button type="button" class="btn btn-danger fs-5 mx-2" data-bs-toggle="modal"
-                            data-bs-target="#modal-apagar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                        <button type="button" class="btn btn-success fs-5" data-bs-toggle="modal"
-                            data-bs-target="#modal-editar">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <!-- CRIADO DINAMICAMENTE -->
         </section>
         <button type="button" class="btn btn-primary btn-lg botao-flutuante" data-bs-toggle="modal"
             data-bs-target="#modal-criar"><i class="bi bi-plus-lg"></i></button>
@@ -83,13 +63,12 @@
                     <div class="modal-body">
                         <form id="form-editar">
                             <div class="mb-3">
-                                <label for="input-descricao" class="col-form-label">Descrição:</label>
-                                <input type="text" class="form-control" id="input-descricao" value="Descrição">
+                                <label for="input-editar-descricao" class="col-form-label">Descrição:</label>
+                                <input type="text" class="form-control" id="input-editar-descricao">
                             </div>
                             <div class="mb-3">
-                                <label for="input-detalhamento" class="col-form-label">Detalhamento:</label>
-                                <textarea class="form-control"
-                                    id="input-detalhamento">Some quick example text to build on the card title and make up the bulk of the card's content.</textarea>
+                                <label for="input-editar-detalhamento" class="col-form-label">Detalhamento:</label>
+                                <textarea class="form-control" id="input-editar-detalhamento"></textarea>
                             </div>
                         </form>
                     </div>

@@ -10,6 +10,10 @@ function mostrarAlerta(mensagem: string, tipo: string) {
                         </div>
                         `;
     espacoAlerta.appendChild(corpoAlerta);
+
+    setTimeout(() => {
+        corpoAlerta.innerHTML = '';
+    }, 3000)
 }
 
 // capturar os elementos para manipulação dos dados
@@ -19,6 +23,10 @@ let descricaoRecado = document.querySelector('#input-criar-descricao') as HTMLIn
 let detalhamentoRecado = document.querySelector('#input-criar-detalhamento') as HTMLInputElement;
 let botaoCriar = document.querySelector('#botao-criar') as HTMLButtonElement;
 let espacoCard = document.querySelector('#espaco-card') as HTMLDivElement;
+let btnAtualizar = document.getElementById('botao-atualizar') as HTMLButtonElement;
+let modalEditar = new bootstrap.Modal('#modal-editar');
+let inputEditDescricao = document.getElementById('input-editar-descricao') as HTMLInputElement;
+let inputEditDetalhamento = document.getElementById('input-editar-detalhamento') as HTMLInputElement;
 
 interface Recado {
     codigo: string,
@@ -33,8 +41,26 @@ botaoCriar.addEventListener('click', () => {
     criarRecado();
 });
 
+document.addEventListener('DOMContentLoaded', carregarRecados);
+
 function criarRecado() {
-    let listaRecados: Recado[] = [];
+    let listaRecados: Recado[] = pegarRecados();
+
+    if (codigoRecado.value === '' || descricaoRecado.value === '' || detalhamentoRecado.value === '') {
+        codigoRecado.setAttribute('style', 'border: 1px solid red; box-shadow: none');
+        descricaoRecado.setAttribute('style', 'border: 1px solid red; box-shadow: none');
+        detalhamentoRecado.setAttribute('style', 'border: 1px solid red');
+        codigoRecado.focus();
+        return
+    }
+
+    let existeCodigo = listaRecados.some((recado) => recado.codigo === codigoRecado.value);
+
+    if (existeCodigo) {
+        codigoRecado.setAttribute('style', 'border: 1px solid red; box-shadow: none');
+        codigoRecado.value = '';
+        return
+    }
 
     let novoRecado: Recado = {
         codigo: codigoRecado.value,
@@ -47,13 +73,9 @@ function criarRecado() {
     modalCriar.hide(); //faz fechar o modal de criar recado
 
     mostrarNoHTML(novoRecado); //cria o card e mostra no HTML
-
+    salvarListaNoStorage(listaRecados);
     mostrarAlerta('Recado adicionado com sucesso', 'success'); //faz mostrar o alerta
 
-    //faz sumir o alerta depois de 2 segundos
-    setTimeout(() => {
-        corpoAlerta.innerHTML = '';
-    }, 2000);
 }
 
 function mostrarNoHTML(novoRecado: Recado) {
@@ -94,7 +116,7 @@ function mostrarNoHTML(novoRecado: Recado) {
     botaoEditar.setAttribute('data-bs-toggle', 'modal');
     botaoEditar.setAttribute('data-bs-target', '#modal-editar');
     botaoEditar.addEventListener('click', () => {
-        editarRecado(novoRecado.codigo);
+        editarRecado(novoRecado);
     })
     botaoEditar.innerHTML = `<i class="bi bi-pencil-square"></i>`;
 
@@ -112,8 +134,60 @@ function apagarRecado(codigo: string) {
     alert(codigo);
 }
 
-function editarRecado(codigo: string) {
-    alert(codigo);
+function editarRecado(recado: Recado) {
+    btnAtualizar.setAttribute('onclick', `atualizarRecado(${recado.codigo})`);
+    inputEditDescricao.value = recado.descricao;
+    inputEditDetalhamento.value = recado.detalhamento;
+}
+
+function atualizarRecado(codigo: string) {
+    let recadoEdit: Recado = {
+        codigo: `${codigo}`,
+        descricao: inputEditDescricao.value,
+        detalhamento: inputEditDetalhamento.value
+    }
+
+    let listaRecados = pegarRecados();
+    let indiceRecado = listaRecados.findIndex((recadoList) => recadoList.codigo == codigo);
+
+
+    listaRecados[indiceRecado] = recadoEdit;
+
+    let cards = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
+
+    for (let card of cards) {
+        if (card.id == codigo) {
+            let codigoRegistro = card.children[0].childNodes[0] as HTMLHeadingElement;
+            let descricaoRegistro = card.children[0].childNodes[1] as HTMLHeadingElement;
+            let detalhamentoRegistro = card.children[0].childNodes[2] as HTMLParagraphElement;
+
+            codigoRegistro.innerHTML = `# ${codigo}`;
+            descricaoRegistro.innerHTML = recadoEdit.descricao;
+            detalhamentoRegistro.innerHTML = recadoEdit.detalhamento;
+
+        }
+    }
+
+    salvarListaNoStorage(listaRecados);
+    modalEditar.hide();
+    mostrarAlerta('Recado atualizado!', 'success');
+}
+
+function salvarListaNoStorage(recados: Recado[]) {
+
+    localStorage.setItem('recados', JSON.stringify(recados));
+}
+
+function carregarRecados() {
+    let recados = JSON.parse(localStorage.getItem('recados') || '[]');
+
+    for (let recado of recados) {
+        mostrarNoHTML(recado);
+    }
+}
+
+function pegarRecados(): Recado[] {
+    return JSON.parse(localStorage.getItem('recados') || '[]');
 }
 
 
